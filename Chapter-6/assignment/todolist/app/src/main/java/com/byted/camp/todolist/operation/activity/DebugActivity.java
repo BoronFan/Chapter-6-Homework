@@ -73,6 +73,7 @@ public class DebugActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+
                         File dir = new File (context.getFilesDir(),"test");
                         //File file = new File(dir, "test");
                         FileUtils.writeContentToFile(dir, "#title \ntest content.");
