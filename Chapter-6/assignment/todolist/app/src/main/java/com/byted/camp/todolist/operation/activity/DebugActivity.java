@@ -1,6 +1,7 @@
 package com.byted.camp.todolist.operation.activity;
 
 import android.Manifest;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DebugActivity extends AppCompatActivity {
-
+    private Context context;
     private static int REQUEST_CODE_STORAGE_PERMISSION = 1001;
 
     @Override
@@ -31,6 +32,7 @@ public class DebugActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_debug);
         setTitle(R.string.action_debug);
+        context=this;
 
         final Button printBtn = findViewById(R.id.btn_print_path);
         final TextView pathText = findViewById(R.id.text_path);
@@ -71,10 +73,10 @@ public class DebugActivity extends AppCompatActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                        File file = new File(dir, "test");
-                        FileUtils.writeContentToFile(file, "#title \ntest content.");
-                        final List<String> contents = FileUtils.readContentFromFile(file);
+                        File dir = new File (context.getFilesDir(),"test");
+                        //File file = new File(dir, "test");
+                        FileUtils.writeContentToFile(dir, "#title \ntest content.");
+                        final List<String> contents = FileUtils.readContentFromFile(dir);
                         DebugActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
