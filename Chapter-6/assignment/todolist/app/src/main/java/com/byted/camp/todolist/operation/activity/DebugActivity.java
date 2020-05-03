@@ -74,7 +74,9 @@ public class DebugActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        File dir = new File (context.getFilesDir(),"test");
+                        //File dir = new File (context.getFilesDir(),"test");//Internal
+                        File dir = new File (context.getFilesDir(),"test");//External
+                        //File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);//Public
                         //File file = new File(dir, "test");
                         FileUtils.writeContentToFile(dir, "#title \ntest content.");
                         final List<String> contents = FileUtils.readContentFromFile(dir);
